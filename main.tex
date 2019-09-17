@@ -1,0 +1,284 @@
+\documentclass[english, oneside, letterpaper]{book}
+\title{Stable Homotopy and Generalised Homology}
+\author{J.\ F.\ Adams}
+\date{1974}
+% Hyperref
+\usepackage[backref=page,hidelinks,unicode]{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=[rgb]{0.780, 0.007, 0},
+    filecolor=[rgb]{0.780, 0.007, 0},
+    linkcolor=[rgb]{0.780, 0.007, 0},
+    urlcolor=[rgb]{0.780, 0.007, 0}
+}
+
+% Biber
+\usepackage[
+    backend=biber,
+    backref=true,
+    style=alphabetic,
+    citestyle=alphabetic
+]{biblatex}
+\bibliography{./bibliography.bib}
+
+% Geometry
+\usepackage[top=3cm,bottom=3cm,headsep=0.75cm,a4paper]{geometry} % Page margins
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{luatexja-fontspec}
+\usepackage{tgbonum}
+
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{4}
+
+% Splitindex
+\usepackage[splitindex]{imakeidx}
+\makeindex[intoc=true, columns=2, title={Index}]
+ 
+% Other
+\usepackage[english]{babel}
+
+% Math
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\tikzcdset{
+    arrow style=tikz,
+    diagrams={>={Straight Barb[scale=1.5]}}
+}
+\usepackage{stmaryrd}
+\usepackage{spectralsequences}
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,positioning}
+\usepackage{mathtools}
+\usepackage{centernot}
+\usepackage{extarrows}
+\usepackage{bm}
+\usepackage{manfnt}
+
+\input{preamble/amsthm_and_cleveref.tex}
+\input{preamble/fonts.tex}
+
+% Blackboard Bold Macros
+\newcommand{\CP}{\mathbb{CP}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\C}{\mathbb{C}}
+\renewcommand{\S}{\mathbb{S}}
+
+\input{preamble/widehat.tex}
+\input{preamble/math_definitions.tex}
+\input{preamble/sum_and_product.tex}
+\input{preamble/categories_infty_categories_infty_operads_definitions.tex}
+
+% Packages
+\usepackage{enumerate}
+\usepackage{sectsty}
+\sectionfont{\centering}
+
+\renewcommand{\thesection}{\arabic{section}.}
+
+% Center TOC
+\usepackage{tocloft}
+\renewcommand{\contentsname}{\hfill\bfseries\Large Contents\hfill}   
+\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\listtablename}{\hfill\bfseries\Large List of Tables} % no \hfill after "List of Tables"...
+%%% using the command "\renewcommand{\cftlottitlefont}{\hfill\bfseries\Large}" works too...
+\renewcommand{\cftafterlottitle}{\hfill}
+
+% Upper Case Math Macros
+\let\H\relax
+\DeclareMathOperator{\H}{\mathrm{H}}
+\DeclareMathOperator{\Lim}{\mathrm{Lim}}
+\DeclareMathOperator{\Th}{\mathrm{Th}}
+\DeclareMathOperator{\M}{\mathrm{M}}
+\let\U\relax
+\DeclareMathOperator{\U}{\mathrm{U}}
+\DeclareMathOperator{\BU}{\mathrm{BU}}
+\newcommand{\MU}{\mathrm{MU}}
+\newcommand{\KO}{\mathrm{KO}}
+
+% Lower Case Math Macros
+\DeclareMathOperator{\lim}{\mathrm{lim}}
+\newcommand{\bu}{\mathrm{bu}}
+\newcommand{\pt}{\mathrm{pt}}
+
+% Adams Blue Book Notation
+\newcommand{\nn}[2]{#2} % 1 is old notation, 2 is new notation
+\newcommand{\nnt}{\otimes}
+\newcommand{\nntunicode}[2]{}
+\newcommand{\maybeprintindex}{\printindex}
+\begin{document}
+\frontmatter
+\maketitle
+\tableofcontents
+\chapter*{\centering Preface}
+\addcontentsline{toc}{chapter}{Preface}
+
+The three sections of this book represent course of lectures which I delivered at the University of Chicago in 1967, 1970 and 1971 respectively; and the three sections are of slightly different characters. the 1967 lectures dealt with part of Novikov's work on complex cobordism while that work was still new---they were prepared before I had access to a translation of Novikov's full-length paper, \href{http://www.mathnet.ru/php/archive.phtml?wshow=paper&jrnid=im&paperid=2568&option_lang=eng}{Izvestija Akademii Nauk SSSR, Serija Matematičeskaja 31 (1967)} 855-951. They were delivered as seminars to an audience assumed to be familiar with algebraic topology. The 1970 lectures also assumed familiarity, but were a longer series attempting a more complete exposition; I aimed to cover Quillen's work on formal groups and complex cobordism. Finally, the 1971 lectures were a full-length ten-week course, aiming to begin at the beginning and cover many of the things a graduate student needs to know in the area of stable homotopy and generalised homology theories. They form two-thirds of the present book.
+
+No attempt has been made to rewrite the three sections to impose uniformity, whether of notation or of anything else. Each section has its own introduction, where the reader may find more details of the topics considered. Each section has its own system of references; in \Cref{part:1} the references are given where they are needed; in \Cref{part:2} the references are collected at the end, with \Cref{part:1} as reference [2]; in \Cref{part:3} the references are again at the end, with \Cref{part:2} as reference [2]. However, the page numbers given in references to [2] refer---I hope---to pages in the present book.
+
+Although I have not tried to impose uniformity by rewriting, a certain unity of theme is present. Among the notions with which familiarity is assumed near the beginning of \Cref{part:1}, I note the following: spectra, products, and the derived functor of the inverse limit. All these matters are treated in \Cref{part:3}---in \cref{sec:part-3-sec-2,sec:part-3-sec-3,sec:part-3-sec-9,sec:part-3-sec-8}. Similarly, near the beginning of \Cref{part:2} I assume it known that a spectrum determines a generalised homology theory and a generalised cohomology theory; this is set out in \Cref{part:3}, \cref{sec:part-3-sec-6}. Again, at the end of \Cref{part:1}, \cref{sec:part-1-sec-2} (page \pageref{page-adams-7}) the reader is referred to the literature for information on $\pi_*(\MU)$; he could equally well go to \Cref{part:2}, \cref{sec:part-2-sec-8} (page \pageref{page-adams-75}). Perhaps one should infer that in my choice of material, methods and results for my later course, I was influenced by the application I had already lectured on, as well as others I knew.
+
+I am conscious of other places where the three parts of this book overlap, but perhaps the reader can profit by analysing these overlaps for himself; and certainly he should feel free to read the parts in an order reflecting his own taste. I need hardly direct the expert; a newcomer to the subject would probably do best to begin by taking what he needs from the first ten sections of \Cref{part:3}.
+
+I would like to express my thanks to my hosts in the University of Chicago, and to R.\ Ming for taking the original notes of \cref{part:3}.
+\mainmatter
+\part{S.P.\ Novikov's Work on Operations}\label{part:1}
+\setcounter{section}{0}
+\section{Introduction}\label{sec:part-1-sec-1}
+The work of S.P. Novikov which is in question was presented at the International Congress of Mathematicians, Moscow, 1966, in a half-hour lecture, in a seminar and in private conversations. It has also been announced in the Doklady of the Academy of Sciences of the USSR, vol. 172 (1967) pp. 33-36. Some of Novikov's results have been obtained independently by F.S.\ Landweber (to appear in the Transactions of the AMS).
+
+The object of these seminar notes is to give an exposition of that part of Novikov's work which deals with operations on complex cobordism. I hope that this will be useful, because I believe that the cohomology functor provided by complex cobordism is now ripe for exploitation. I therefore aim to present the material in sufficient detail, so that a reader who has a concrete application in mind can make his own calculations. In particular, I will give certain formulae which are not made explicit in the sources cited above.
+
+These notes will not deal with any of the other topics which are mentioned in the sources cited above. These include the following.
+\begin{enumerate}[i.]
+    \item Generalizations of the Adams spectral sequence in which ordinary cohomology is replaced by generalized (extraordinary) cohomology.
+    \item Connections between these studies for complex cobordism $\Omega_U^*(X,Y)$ and the corresponding studies for complex $K$-theory $K^*(X,Y)$.
+    \item The cohomology functor $\Omega_U^*(X,Y)\otimes\Q_{(p)}$ (where \nn{$\Q_p$}{$\Q_{(p)}}$ is the ring of rational numbers $a/b$ with $b$ prime to $p$); and the splitting of this functor into direct summands.
+\end{enumerate}
+\section{Cobordism Groups}\label{sec:part-1-sec-2}
+Let $\xi$ be a $\U(n)$-bundle over the CW-complex $X$. Let $E$ and $E_0$ be the total spaces of the associated bundles whose fibers are respectively the unit disc \nn{$E^{2n}\subset\C^n$}{$D^{2n}\subset\C^n$} and the unit sphere $S^{2n-1}\subset\C^n$. Then the Thom complex is by definition the quotient space $E/E_0$; it is a CW-complex with base point. In particular, if we take $\xi$ to be the universal $\U(n)$-bundle over $\BU(n)$, then the resulting Thom complex \nn{$\M(\xi)$}{$\Th(\xi)$} is written $\MU(n)$.
+\begin{example}
+    There is a homotopy equivalence \nn{$\MU(1)\sim\BU(1)$}{$\MU(1)\cong\BU(1)$}.
+\end{example}
+\begin{proof}
+    Since $E$ is a bundle with contractible fibers, the projection $p\colon E\rightarrow\BU(1)$ and the zero cross-section $s_0\colon\BU(1)\rightarrow E$ are mutually inverse equivalences. Since $S^1=\U(1)$ and $E_0$ is the total space of the universal $\U(1)$-bundle over $\BU(1)$, $E_0$ is contractible, and the quotient map $E\rightarrow E/E_0$ is a homotopy equivalence.
+\end{proof}
+We have an obvious map \nn{$S^2\MU(n)\xlongrightarrow{i_n}\MU(n+1)$}{$\Sigma^2\MU(n)\xlongrightarrow{i_n}\MU(n+1)$}. In this way the sequence of spaces
+\[(\MU(0),\MU(1),\MU(2),\ldots,\MU(n),\ldots)\]
+and maps $i_n$ becomes a spectrum. Associated with this spectrum we have a cohomology functor, as in \href{https://www.jstor.org/stable/1993676?seq=1#metadata_info_tab_contents}{G.W.\ Whitehead, ``Generalized homology theories,'' Trans.\ Amer.\ Math.\ Soc.\ 102 (1962)}, pp.\ 227--283.
+
+The groups of this cohomology functor are written $\Omega^q_U(X,Y)$, and called complex cobordism groups. For other accounts, see \href{https://www.maths.ed.ac.uk/~v1ranick/papers/atiyahb.pdf}{M.F.\ Atiyah, ``Bordism and Cobordism,'' Proc.\ Cam.\ Phil.\ Soc.\ 57 (1961)} pp. 200--208, and \href{https://www.springer.com/gp/book/9783540036104}{P.E.\ Conner and E.E.\ Floyd, ``The Relation of Cobordism to $K$-Theories,'' Springer, Lecture Notes in Mathematics No.\ 28, 1966}, pp. 25--28.
+
+We will generally suppose that this cohomology functor is defined on some category of spectra or stable objects. This assumption can easily be removed, if the reader wishes, at the cost of making some of the proofs more complicated; one would have to replace the appropriate spectra by sequences of complexes approximating to them.
+
+Next we wish to discuss the cup-products in this cohomology theory. We therefore wish to introduce the product map
+\[\mu\colon\nn{\MU\wedge\MU}{\MU\nnt\MU}\rightarrow\MU\]
+Here ``$\nnt$'' means the smash product, and we assume that $\MU\nnt\MU$ can be formed in our stable category. We further assume that $\MU\nnt\MU$ has skeletons $(\MU\nnt\MU)^q$, in a suitable sense, so that we have a short exact sequence
+\begin{diagram*}
+    \begin{tikzcd}[row sep={2.7em, between origins}, column sep={1.8em, between origins}]
+            0
+            \arrow[r] &
+            {\nn{\Lim^1_q}{\lim^1_q}\left[\nn{S}{\Sigma}(\MU\nnt\MU)^q,\MU\right]}
+            \arrow[r] &
+            {[\MU\nnt\MU,\MU]}
+            \arrow[r] &
+            {\nn{\Lim^0_q}{\lim_q}\left[(\MU\nnt\MU)^q,\MU\right]}
+            \arrow[r] &
+            0.
+    \end{tikzcd}
+\end{diagram*}%
+(Here $\nn{\Lim^0}{\lim}$ means the inverse limit, $\nn{\Lim^1}{\lim^1}$ means the first derived functor of the inverse limit, and $[X,Y]$ means the group of stable homotopy classes of maps from $X$ to $Y$ in our stable category.) In this exact sequence, the group $\nn{\Lim^1}{\lim^1}\left[\nn{S}{\Sigma}(\MU\nnt\MU)^q,\MU\right]$ is zero. (This follows from the facts that $\H_r(\MU\nnt\MU)=0$ for $r$ odd and $\pi_r(\MU)=0$ for $r$ odd---see below. Thus the spectral sequence
+    \begin{diagram*}
+        \begin{tikzcd}[row sep={2.7em, between origins}, column sep={2.7em, between origins}]
+            {\H^*(\MU\nnt\MU,\pi_*(\MU))}
+            \arrow[r, Rightarrow] &
+            {[\MU\nnt\MU,\MU]}
+        \end{tikzcd}
+    \end{diagram*}%
+has all its differentials zero.) It will therefore be sufficient to give an element of $\nn{\Lim^0_q}{\lim_q}[(\MU\nnt\MU)^q,\MU]$.
+
+Now, we have a map
+\begin{diagram*}
+    \begin{tikzcd}[row sep={2.7em, between origins}, column sep={2.7em, between origins}]
+        \BU(n)\times\BU(m)
+        \arrow[r] &
+        \BU(n+m),
+    \end{tikzcd}
+\end{diagram*}%
+namely the classifying map for the Whitney sum of the universal bundles over $\BU(n)$ and $\BU(m)$. Over this map we have a map
+\[\mu_{n,m}\colon\MU(n)\nnt\MU(m)\longrightarrow\MU(n+m).\]
+The maps $\mu_{n,m}$ yield an element of $\nn{\Lim^0_q}{\lim_q}[(\MU\nnt\MU)^q,\MU]$, and therefore they yield a unique homotopy class of maps
+\[\mu\colon\MU\nnt\MU\rightarrow\MU.\]
+The map $\mu$ is commutative and associative (up to homotopy).
+
+Using the map $\mu$, one introduces products in cobordism. More precisely, one has a product
+\begin{diagram*}
+    \begin{tikzcd}[row sep={2.7em, between origins}, column sep={2.7em, between origins}]
+        \Omega_U^q(X)\otimes\Omega^r_U(Y)
+        \arrow[r] &
+        \Omega^{q+r}_U(X\nnt Y),
+    \end{tikzcd}
+\end{diagram*}%
+where $X$ and $Y$ are spectra, and therefore a similar product for the reduced groups $\widetilde{\Omega}_U^*$ where $X$ and $Y$ are spaces. For spaces we have also an external product
+\begin{diagram*}
+    \begin{tikzcd}[row sep={2.7em, between origins}, column sep={2.7em, between origins}]
+        \Omega_U^q(X,A)\otimes\Omega^r_U(Y,B)
+        \arrow[r] &
+        \Omega^{q+r}_U(X\times Y,A\times Y\cup X\times B)
+    \end{tikzcd}
+\end{diagram*}%
+and an internal product
+\begin{diagram*}
+    \begin{tikzcd}[row sep={2.7em, between origins}, column sep={2.7em, between origins}]
+        \Omega_U^q(X,A)\otimes\Omega^r_U(Y,B)
+        \arrow[r] &
+        \Omega^{q+r}_U(X,A\cup B).
+    \end{tikzcd}
+\end{diagram*}%
+The products satisfy the axioms which products should satisfy, that is, naturality, associativity, anticommutativity, existence of unit, and behavior with respect to suspension or coboundary.
+
+Next we must mention the Thom isomorphism. For each $\U(n)$-bundle $\xi$ over $X$ the classifying map for $\xi$ induces a map
+\[\gamma\colon\nn{\M(\xi)}{\Th(\xi)}\rightarrow\MU(n).\]
+The map $\gamma$ represents a canonical element $g$ in $\Omega_U^{2n}(E,E^0)$. We define the \index{Thom isomorphism}Thom isomorphism
+\[\varphi\colon\Omega^q_U(X)\longrightarrow\Omega_U^{q+2n}(E,E^0)\]
+by $\varphi(x)=(p^*x)g$, as usual. (See \href{http://www.mathnet.ru/php/archive.phtml?wshow=paper&jrnid=mat&paperid=350&option_lang=eng}{A.\ Dold, ``Relations between Ordinary and Extraordinary Cohomology,'' Colloquium on Algebraic Topology, Aarhus 1962}.)
+
+\label{page-adams-7}
+Only one thing remains before we have a fair grasp on the cohomology functor $\Omega_U$; we need to know the coefficient groups $\Omega_U^q(\nn{P}{\pt})$, where $\nn{P}{\pt}$ is a point. In fact, $\Omega^*_U(\nn{P}{\pt})$ is a polynomial ring
+\[\Z[x_1,x_2,\ldots,x_i,\ldots],\]
+where $x_i\in\Omega_U^{-2i}(\nn{P}{\pt})$. A good grasp on $\Omega_U^q(\nn{P}{\pt})$ is provided by the following authors: \href{https://www.jstor.org/stable/2372970?seq=1#metadata_info_tab_contents}{J.\ Milnor, ``On the Cobordism Ring $\Omega^*$ and a Complex Analogue,'' Amer.\ Jour.\ Math.\ 82 (1960)} pp.\ 505--521; \href{https://www.sciencedirect.com/science/article/pii/004093836590011X}{R.\ Stong, ``Relations among Characteristic Numbers. I,'' Topology 4 (1965)} pp.\ 267--281; \href{https://www.sciencedirect.com/science/article/pii/0040938366900103}{A.\ Hattori, ``Integral characteristic numbers for weakly almost complex manifolds,'' Topology 5 (1966)} pp.\ 259--280.
+\section{Homology}\label{sec:part-1-sec-3}
+\section{The Conner--Floyd Chern Classes}\label{sec:part-1-sec-4}
+\section{The Novikov Operations}\label{sec:part-1-sec-5}
+\section{The Algebra of All Operations}\label{sec:part-1-sec-6}
+\section{Scholium on Novikov's Exposition}\label{sec:part-1-sec-7}
+\section{Complex Manifolds}\label{sec:part-1-sec-8}
+\part{Quillen's Work on Formal Groups and Complex Cobordism}\label{part:2}
+\setcounter{section}{0}
+\section{Introduction}\label{sec:part-2-sec0}
+\section{Formal Groups}\label{sec:part-2-sec-1}
+\section{Examples From Algebraic Topology}\label{sec:part-2-sec-2}
+\section{Reformulation}\label{sec:part-2-sec-3}
+\section{Calculations in \texorpdfstring{$E$}{E}-Homology and Cohomology}\label{sec:part-2-sec-4}
+\section{Lazard's Universal Ring}\label{sec:part-2-sec-5}
+\section{More Calculations in \texorpdfstring{$E$}{E}-Homology}\label{sec:part-2-sec-6}
+\section{The Structure of Lazard's Universal Ring}\label{sec:part-2-sec-7}
+\section{Quillen's Theorem}\label{sec:part-2-sec-8}
+\label{page-adams-75}
+\section{Corollaries}\label{sec:part-2-sec-9}
+\section{Various Formulae in \texorpdfstring{$\pi_*(\MU)$}{π_*(MU)}}\label{sec:part-2-sec-10}
+\section{\texorpdfstring{$\MU_*(\MU)$}{MU_*(MU)}}}\label{sec:part-2-sec-11}
+\section{Behaviour of Bott Map}\label{sec:part-2-sec-12}
+\section{\texorpdfstring{$K_*(K)$}{K_*(K)}}\label{sec:part-2-sec-13}
+\section{The Hattori--Stong Theorem}\label{sec:part-2-sec-14}
+\section{Quillen's Idempotent Cohomology Operations}\label{sec:part-2-sec-15}
+\section{The Brown--Peterson Spectrum}\label{sec:part-2-sec-16}
+\section{\texorpdfstring{$\KO_*(\KO)$}{KO_*(KO)}}\label{sec:part-2-sec-17}
+\part{Stable Homotopy and Generalised Homology}\label{part:3}
+\setcounter{section}{0}
+\section{Introduction}\label{sec:part-3-sec-1}
+\section{Spectra}\label{sec:part-3-sec-2}
+\section{Elementary Properties of the Category of CW-Spectra}\label{sec:part-3-sec-3}
+\section{Smash Products}\label{sec:part-3-sec-3}
+\section{Spanier--Whitehead Duality}\label{sec:part-3-sec-5}
+\section{Homology and Cohomology}\label{sec:part-3-sec-6}
+\section{The Atiyah--Hirzebruch Spectral Sequence}\label{sec:part-3-sec-7}
+\section{The Inverse Limit and its Derived Functors}\label{sec:part-3-sec-8}
+\section{Products}\label{sec:part-3-sec-9}
+\section{Duality in Manifolds}\label{sec:part-3-sec-10}
+\section{Applications in \texorpdfstring{$K$}{K}-Theory}\label{sec:part-3-sec-11}
+\section{The Steenrod Algebra and its Dual}\label{sec:part-3-sec-12}
+\section{A Universal Coefficient Theorem}\label{sec:part-3-sec-13}
+\section{A Category of Fractions}\label{sec:part-3-sec-14}
+\section{The Adams Spectral Sequence}\label{sec:part-3-sec-15}
+\section{Applications to $\pi_*(\bu\nnt X)$; Modules Over \texorpdfstring{$K[x,y]$}{K[x,y]}}\label{sec:part-3-sec-16}
+\section{Structure of \texorpdfstring{$\pi_*(\bu\nnt\bu)$}{π_*(bu\nntunicode bu)}}\label{sec:part-3-sec-17}
+\maybeprintindex
+\end{document}
