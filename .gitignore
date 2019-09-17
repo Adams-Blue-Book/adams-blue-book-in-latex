@@ -1,0 +1,14 @@
+*.aux
+*.bcf
+*.idx
+*.log
+*.maf
+*.mtc
+*.mtc0
+*.out
+*.xml
+*.run.xml
+*.synctec.gz
+*.toc
+*.ilg
+*.ind
